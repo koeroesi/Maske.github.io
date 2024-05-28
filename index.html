@@ -1,0 +1,214 @@
+
+<<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    User
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rain Animation</title>
+<style>
+    body, html {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+    }
+    canvas {
+        display: block;
+    }
+</style>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+<script>
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+
+    const minParticleSize = 2;
+    const maxParticleSize = 5;
+    const gravity = 0.1;
+    const rainColor = "black"; // Color of raindrops
+    const trailLength = 300; // Length of the trail
+
+    let particles = [];
+
+    function init() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        particles = [];
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Create new raindrops at random x-coordinates across the entire width of the screen
+        particles.push({
+            x: Math.random() * canvas.width, // Randomize initial x-coordinate
+            y: 0,
+            size: minParticleSize + Math.random() * (maxParticleSize - minParticleSize),
+            dy: Math.random() * 5, // Randomize falling speed
+            trail: [] // Initialize an empty array to store the trail points
+        });
+
+        // Update and draw particles
+        particles.forEach(particle => {
+            // Update raindrop position
+            particle.y += particle.dy;
+
+            // Add current position to the trail array
+            particle.trail.push({ x: particle.x, y: particle.y });
+
+            // Draw trail effect
+            for (let i = 0; i < particle.trail.length; i++) {
+                const trailPoint = particle.trail[i];
+                const trailAlpha = (i + 1) / particle.trail.length; // Decrease opacity for each trail segment
+                ctx.fillStyle = `rgba(0, 0, 0, ${trailAlpha})`; // Use rgba to set opacity
+                ctx.beginPath();
+                ctx.arc(trailPoint.x, trailPoint.y, particle.size / 2, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            // Remove raindrop if its trail has disappeared
+            if (particle.trail.length >= trailLength) {
+                particles.splice(particles.indexOf(particle), 1);
+            }
+
+            // Draw raindrop
+            ctx.fillStyle = rainColor;
+            ctx.beginPath();
+            ctx.arc(particle.x, particle.y, particle.size / 2, 0, Math.PI * 2);
+            ctx.fill();
+        });
+
+        // Continue animation if there are still particles
+        if (particles.length > 0) {
+            requestAnimationFrame(draw);
+        }
+    }
+
+    init();
+    draw();
+</script>
+</body>
+</html>
+
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Holographic Background</title>
+<style>
+    body, html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+    }
+
+    body {
+        overflow: hidden;
+        background: 
+            linear-gradient(45deg, rgba(255, 0, 255, 0.3), rgba(0, 255, 255, 0.3), rgba(255, 0, 255, 0.3), rgba(0, 255, 255, 0.3), rgba(255, 0, 255, 0.3), rgba(255, 255, 0, 0.3), rgba(0, 255, 255, 0.3), rgba(255, 255, 0, 0.3)),
+            linear-gradient(135deg, rgba(255, 0, 255, 0.3), rgba(0, 255, 255, 0.3), rgba(255, 0, 255, 0.3), rgba(0, 255, 255, 0.3), rgba(255, 0, 255, 0.3), rgba(255, 255, 0, 0.3), rgba(0, 255, 255, 0.3), rgba(255, 255, 0, 0.3));
+        background-size: 200% 200%;
+        animation: gradient 10s ease infinite;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+    }
+
+    @keyframes gradient {
+        0% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+
+    .content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        color: white;
+        z-index: 1;
+    }
+
+    h1 {
+        font-size: 3rem;
+        margin-bottom: 20px;
+    }
+
+    p {
+        font-size: 1.2rem;
+    }
+</style>
+</head>
+<body>
+    <div class="content">
+        <h1></h1>
+        <p></p>
+    </div>
+</body>
+</html>
+
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masket</title>
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <style>
+      body, html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      #model-viewer-container {
+        width: 80%; /* Adjust this value as needed */
+        height: 80%; /* Adjust this value as needed */
+      }
+    </style>
+    
+  </head>
+  <body>
+    <div id="model-viewer-container">
+      <model-viewer id="model-viewer"
+                    src="Maske.glb"
+                    ios-src="Maske.usdz"
+                    alt="Maske"
+                    ar
+                    auto-rotate
+                    camera-controls
+                    ar-modes="webxr scene-viewer quick-look" 
+                    environment-image="neutral">   
+      </model-viewer>
+    </div>
+    <script>
+      async function checkARCoreCompatibility() {
+        const modelViewer = document.getElementById('model-viewer');
+        const isARCoreSupported = await navigator.xr.isSessionSupported('immersive-ar');
+        if (!isARCoreSupported) {
+          modelViewer.removeAttribute('ar');
+          modelViewer.removeAttribute('ar-modes');
+          alert('Your device is not compatible with AR features. You can still view the 3D model.');
+        }
+      }
+
+      document.addEventListener('DOMContentLoaded', checkARCoreCompatibility);
+    </script>
+  </body>
+</html>

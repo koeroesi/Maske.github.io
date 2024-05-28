@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <!DOCTYPE html>
+    <html lang="de">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Meine Webseite</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 20px;
+                
+                /* Hinzugefügter Farbverlauf-Hintergrund */
+                height: 100vh;
+                background: linear-gradient(45deg, 
+                            #FFD1DC, /* Pastellrosa */
+                            #AFCBFF, /* Pastellblau */
+                            #C3FBD8, /* Pastellgrün */
+                            #FFFACD, /* Pastellgelb */
+                            #FFB6C1  /* Hellrosa */
+                        );
+                background-size: 400% 400%;
+                animation: gradientAnimation 15s ease infinite;
+            }
+    
+            @keyframes gradientAnimation {
+                0% { background-position: 0% 50%; }
+                50% { background-position: 100% 50%; }
+                100% { background-position: 0% 50%; }
+            }
+    
+            h1 {
+                color: #333;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Willkommen auf meiner Webseite!</h1>
+        <p>Das ist ein Beispieltext.</p>
+    </body>
+    </html>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MASKE 1 AR Test</title>
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+  </head>
+  <body>
+<H2>MASKE 1 AR Test</H2>
+  <model-viewer src="MASKE 1.glb"
+                ios-src="MASKE 1.usdz"
+                alt="MASKE 1"
+                ar
+                auto-rotate
+                camera-controls
+                ar-modes="webxr scene-viewer quick-look" 
+                environment-image="neutral">   
+  </model-viewer>
+   </body>
+</html>
